@@ -9,6 +9,11 @@ use GuzzleHttp\Client as GuzzleClient;
 
 class Client extends AbstractServiceClient
 {
+    const LISTORDER = 'ListOrder';
+    const NEWORDER = 'NewOrder';
+    const SHOWORDER = 'ShowOrder';
+    const CONFIRMORDER = 'ConfirmOrder';
+
     /**
      * API domain
      *
@@ -28,12 +33,13 @@ class Client extends AbstractServiceClient
      */
     private $clientId;
     /**
-     * @param string $token access token
-     */
-    /**
      * @var string
      */
     protected $libraryName = 'orion-php-library';
+    /**
+     * @var array
+     */
+    protected $mappingOptionals = array();
 
     public function __construct($clientId = '', $token = '')
     {
@@ -132,5 +138,17 @@ class Client extends AbstractServiceClient
             );
         }
         return $response;
+    }
+    /**
+     * @return array
+     */
+    protected function getOptions()
+    { 
+        $queryData = null;
+        foreach ($this->mappingOptionals as $key => $propertyName) {
+            if(isset($this->{$propertyName})) {
+                $queryData[$key] = $this->{$propertyName};
+            }
+        }
     }
 }
