@@ -64,7 +64,7 @@ class OrdersClient extends Client
      */
     public function getListOrder()
     { 
-        $response = $this->sendRequest('GET', $this->getServiceUrl(), $this->getOptions());
+        $response = $this->sendRequest('POST', $this->getServiceUrl(), array('json' => $this->getOptions()));        
         $decodedResponseBody = $this->getDecodedBody($response->getBody());
         return new ListOrder($decodedResponseBody);
     }

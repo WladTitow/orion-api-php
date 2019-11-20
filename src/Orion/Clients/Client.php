@@ -79,7 +79,7 @@ class Client extends AbstractServiceClient
      *
      * @return string
      */
-    public function getServiceUrl()
+    public function getServiceUrl($resource = '')
     {
         return $this->serviceScheme . '://' . $this->serviceDomain;        
     }
@@ -144,11 +144,12 @@ class Client extends AbstractServiceClient
      */
     protected function getOptions()
     { 
-        $queryData = null;
+        $queryData = array();        
         foreach ($this->mappingOptionals as $key => $propertyName) {
             if(isset($this->{$propertyName})) {
                 $queryData[$key] = $this->{$propertyName};
             }
         }
+        return $queryData;
     }
 }
