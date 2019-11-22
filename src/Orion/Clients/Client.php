@@ -13,6 +13,7 @@ class Client extends AbstractServiceClient
     const NEWORDER = 'NewOrder';
     const SHOWORDER = 'ShowOrder';
     const CONFIRMORDER = 'ConfirmOrder';
+    const PRODUCT = 'GetProductCharacteristics';
 
     /**
      * API domain
