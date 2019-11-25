@@ -8,7 +8,8 @@ class ProductData extends Model
     protected $properties;
     //...
     protected $propNameMap = [
-        'ProductId' => 'productId'
+        'ProductId' => 'productId',
+        'Properties' => 'properties'
     ];
     protected $mappingClasses = [
         'properties' => Properties::class,
