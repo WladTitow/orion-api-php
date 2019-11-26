@@ -22,7 +22,10 @@ Orion api php sdk
         $orderData = $orderClient->getOrderData();
         $items = $orderData->getItems()->getAll();
         foreach($items as $ikey => $item){
-            echo '['.$item->getProductId().' : '.$item->getProductQty().' - '.$item->getProductCost().']';
+            echo '['.
+                $item->getProductId().' : '.
+                $item->getProductQty().' - '.
+                $item->getProductCost().']';
             echo '<br>';
         }
     }
@@ -40,13 +43,16 @@ Orion api php sdk
     foreach($products as $key => $product) {
         $properties = $product->geProperties()->getAll();
         foreach($properties as $pkey => $property) {
-            echo '['.$property->getGroup().' : '.$property->getName().' - '.$property->getValue().']';
+            echo '['.
+                $property->getGroup().' : '.
+                $property->getName().' - '.
+                $property->getValue().']';
             echo '<br>';
         }
     }
 ```
 
-2. Создание нового заказа
+3. Создание нового заказа
 
 ```php
     // ...
@@ -69,13 +75,14 @@ Orion api php sdk
     }
 ```
 
-2. Подтверждение товаров в заказе
+4. Подтверждение товаров в заказе
 
 ```php
     // ...
     $confirmOrder = new \Orion\Clients\ConfirmOrderClient($clienId, $token);
     $confirmOrder->setRealId('s0000000000');
-    $item = new \Orion\Models\NewOrderItem(array('productId' => 000, 'count' => 1, 'price' => 100, 'wishPrice' => 99));
+    $item = new \Orion\Models\NewOrderItem(
+        array('productId' => 000, 'count' => 1, 'price' => 100, 'wishPrice' => 99));
     $confirmOrder->addItem($item);
     $confirmData = $confirmOrder->confirmOrder();
     echo '('.$confirmData->getRealId().')';
